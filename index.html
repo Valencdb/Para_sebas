@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Sebas</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#eeeeee;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+}
+
+
+/* ==================================================
+   RAMO
+================================================== */
+
+.ramo{
+    position:relative;
+    width:430px;
+    height:650px;
+}
+
+
+/* ==================================================
+   PAPEL VERDE
+================================================== */
+
+.papel{
+    position:absolute;
+
+    width:250px;
+    height:235px;
+
+    left:50%;
+    bottom:35px;
+
+    transform:translateX(-50%) scale(0);
+
+    background:
+        linear-gradient(
+            135deg,
+            #b6d99d,
+            #83bd7c 50%,
+            #5d9f68
+        );
+
+    clip-path:polygon(
+        5% 0,
+        95% 0,
+        72% 100%,
+        28% 100%
+    );
+
+    opacity:0;
+
+    z-index:3;
+}
+
+.papel.aparecer{
+    animation:papelEntrada 1s ease forwards;
+}
+
+@keyframes papelEntrada{
+
+    0%{
+        opacity:0;
+        transform:translateX(-50%) scale(0);
+    }
+
+    70%{
+        transform:translateX(-50%) scale(1.08);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateX(-50%) scale(1);
+    }
+
+}
+
+
+/* ==================================================
+   TALLOS
+================================================== */
+
+.tallos{
+    position:absolute;
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+}
+
+.tallo{
+    position:absolute;
+
+    width:6px;
+    height:250px;
+
+    background:#43894d;
+
+    left:50%;
+
+    bottom:145px;
+
+    transform-origin:bottom;
+
+    transform:scaleY(0);
+
+    opacity:0;
+
+    border-radius:10px;
+}
+
+
+/* TALLOS MÁS JUNTOS EN EL CENTRO */
+
+.tallo1{
+    transform:rotate(-20deg) scaleY(0);
+}
+
+.tallo2{
+    transform:rotate(-6deg) scaleY(0);
+}
+
+.tallo3{
+    transform:rotate(6deg) scaleY(0);
+}
+
+.tallo4{
+    transform:rotate(20deg) scaleY(0);
+}
+
+.tallos.aparecer .tallo{
+    animation:talloEntrada .9s ease forwards;
+}
+
+@keyframes talloEntrada{
+
+    from{
+        opacity:0;
+
+        transform:
+            rotate(var(--rot))
+            scaleY(0);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            rotate(var(--rot))
+            scaleY(1);
+    }
+
+}
+
+
+/* ==================================================
+   FLORES
+================================================== */
+
+.flores{
+    position:absolute;
+    inset:0;
+
+    z-index:4;
+
+    pointer-events:none;
+}
+
+.flor{
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    opacity:0;
+
+    transform:scale(.2);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.flor.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+
+/* ==================================================
+   FLORES PRINCIPALES
+================================================== */
+
+.flor1{
+    left:5px;
+    top:190px;
+}
+
+.flor2{
+    left:155px;
+    top:120px;
+}
+
+.flor3{
+    right:0;
+    top:180px;
+}
+
+.flor4{
+    left:65px;
+    top:285px;
+}
+
+.flor5{
+    right:65px;
+    top:290px;
+}
+
+
+/* ==================================================
+   FLORES ADICIONALES DE ATRÁS
+================================================== */
+
+.flor6{
+    left:35px;
+    top:135px;
+
+    width:90px;
+    height:90px;
+
+    z-index:-1;
+}
+
+.flor7{
+    right:35px;
+    top:130px;
+
+    width:90px;
+    height:90px;
+
+    z-index:-1;
+}
+
+.flor8{
+    left:170px;
+    top:260px;
+
+    width:95px;
+    height:95px;
+
+    z-index:-1;
+}
+
+
+/* ==================================================
+   COLORES DE LAS FLORES
+================================================== */
+
+/* Flores principales amarillas */
+
+.flor1 .petal-fill,
+.flor2 .petal-fill,
+.flor3 .petal-fill,
+.flor4 .petal-fill,
+.flor5 .petal-fill{
+    fill:#f4c234;
+}
+
+
+/* Flor adicional roja */
+
+.flor6 .petal-fill{
+    fill:#e53935;
+}
+
+
+/* Flor adicional rosa */
+
+.flor7 .petal-fill{
+    fill:#ec407a;
+}
+
+
+/* Flor adicional naranja */
+
+.flor8 .petal-fill{
+    fill:#f57c00;
+}
+
+
+/* Bordes de las flores */
+
+.flor6 .petal,
+.flor7 .petal,
+.flor8 .petal{
+    stroke:#a52a2a;
+}
+
+
+/* ==================================================
+   PÉTALOS
+================================================== */
+
+.petal{
+    fill:none;
+
+    stroke:#d99a2a;
+
+    stroke-width:2;
+
+    opacity:.95;
+}
+
+.petal-fill{
+    fill:#f4c234;
+
+    opacity:.9;
+}
+
+.center-dot{
+    fill:#70451f;
+
+    stroke:#593617;
+
+    stroke-width:.6;
+}
+
+
+/* ==================================================
+   HOT WHEELS
+================================================== */
+
+.hotwheels{
+    position:absolute;
+    inset:0;
+
+    z-index:7;
+
+    pointer-events:none;
+}
+
+
+.auto{
+    position:absolute;
+
+    width:125px;
+    height:165px;
+
+    object-fit:contain;
+
+    opacity:0;
+
+    filter:
+        drop-shadow(
+            0 6px 5px
+            rgba(0,0,0,.3)
+        );
+
+    transform:scale(0);
+}
+
+
+/* ==================================================
+   POSICIONES DE LOS HOT WHEELS
+================================================== */
+
+/* CARRO DE ARRIBA IZQUIERDA - BAJADO */
+
+.auto1{
+    left:50px;
+    top:135px;
+
+    transform:
+        rotate(-10deg)
+        scale(0);
+}
+
+
+/* CARRO DE ARRIBA DERECHA - BAJADO */
+
+.auto2{
+    right:40px;
+    top:125px;
+
+    transform:
+        rotate(9deg)
+        scale(0);
+}
+
+
+/* CARRO DEL CENTRO */
+
+.auto3{
+    left:162px;
+    top:170px;
+
+    transform:
+        rotate(-2deg)
+        scale(0);
+}
+
+
+/* ==================================================
+   ANIMACIÓN HOT WHEELS
+================================================== */
+
+.auto.aparecer{
+    animation:
+        autoEntrada
+        1s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes autoEntrada{
+
+    0%{
+        opacity:0;
+
+        transform:
+            scale(0)
+            translateY(80px);
+    }
+
+    65%{
+        opacity:1;
+
+        transform:
+            scale(1.10)
+            translateY(-8px);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* ==================================================
+   BOTÓN
+================================================== */
+
+button{
+
+    border:none;
+
+    margin-top:5px;
+
+    padding:15px 30px;
+
+    border-radius:30px;
+
+    background:#ef7196;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.2);
+
+    transition:
+        transform .2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     RAMO
+================================================== -->
+
+<div class="ramo">
+
+
+    <!-- PAPEL VERDE -->
+
+    <div
+        class="papel"
+        id="papel">
+    </div>
+
+
+    <!-- TALLOS -->
+
+    <div
+        class="tallos"
+        id="tallos">
+
+        <div
+            class="tallo tallo1"
+            style="--rot:-20deg">
+        </div>
+
+        <div
+            class="tallo tallo2"
+            style="--rot:-6deg">
+        </div>
+
+        <div
+            class="tallo tallo3"
+            style="--rot:6deg">
+        </div>
+
+        <div
+            class="tallo tallo4"
+            style="--rot:20deg">
+        </div>
+
+    </div>
+
+
+    <!-- FLORES -->
+
+    <div
+        class="flores"
+        id="flores">
+    </div>
+
+
+    <!-- HOT WHEELS -->
+
+    <div class="hotwheels">
+
+        <img
+            src="Carron.png"
+            class="auto auto1"
+            alt="Hot Wheels 1"
+        >
+
+        <img
+            src="Carrob.png"
+            class="auto auto2"
+            alt="Hot Wheels 2"
+        >
+
+        <img
+            src="Carror.png"
+            class="auto auto3"
+            alt="Hot Wheels 3"
+        >
+
+    </div>
+
+
+</div>
+
+
+<!-- BOTÓN -->
+
+<button onclick="crearRamo()">
+    Toca
+</button>
+
+
+<script>
+
+
+/* ==================================================
+   CONFIGURACIÓN DE LAS FLORES
+================================================== */
+
+const PETAL_COUNT = 14;
+
+const PETAL_INNER = 25;
+
+const PETAL_OUTER = 75;
+
+const PETAL_WIDTH = 22;
+
+const PETAL_STEPS = 35;
+
+const CENTER_DOTS = 70;
+
+const CENTER_SCALE = 4.5;
+
+
+/* ==================================================
+   CREAR UNA FLOR
+================================================== */
+
+function crearFlor(){
+
+    const svg =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+        );
+
+    svg.setAttribute(
+        "viewBox",
+        "-120 -120 240 240"
+    );
+
+    svg.classList.add("flor");
+
+
+    const petals =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "g"
+        );
+
+    const center =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "g"
+        );
+
+
+    svg.appendChild(petals);
+    svg.appendChild(center);
+
+
+    /* ==================================================
+       CREAR PÉTALOS
+    ================================================== */
+
+    for(
+        let i=0;
+        i<PETAL_COUNT;
+        i++
+    ){
+
+        const angle =
+            (360 / PETAL_COUNT) * i;
+
+
+        const path =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "path"
+            );
+
+
+        path.setAttribute(
+            "d",
+            hacerPetalo(angle)
+        );
+
+
+        path.classList.add(
+            "petal"
+        );
+
+
+        const fill =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "path"
+            );
+
+
+        fill.setAttribute(
+            "d",
+            hacerPetalo(angle)
+        );
+
+
+        fill.classList.add(
+            "petal-fill"
+        );
+
+
+        petals.appendChild(fill);
+        petals.appendChild(path);
+
+
+        const length =
+            path.getTotalLength();
+
+
+        path.style.strokeDasharray =
+            length;
+
+        path.style.strokeDashoffset =
+            length;
+
+        path.dataset.length =
+            length;
+
+    }
+
+
+    /* ==================================================
+       CENTRO DE LA FLOR
+    ================================================== */
+
+    for(
+        let i=0;
+        i<CENTER_DOTS;
+        i++
+    ){
+
+        const phi =
+            Math.PI *
+            (3 - Math.sqrt(5));
+
+
+        const r =
+            Math.sqrt(i + .5) *
+            CENTER_SCALE;
+
+
+        const theta =
+            i * phi;
+
+
+        const x =
+            r * Math.cos(theta);
+
+
+        const y =
+            r * Math.sin(theta);
+
+
+        const dot =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle"
+            );
+
+
+        dot.setAttribute(
+            "cx",
+            x
+        );
+
+
+        dot.setAttribute(
+            "cy",
+            y
+        );
+
+
+        dot.setAttribute(
+            "r",
+            2.5
+        );
+
+
+        dot.classList.add(
+            "center-dot"
+        );
+
+
+        dot.style.opacity=0;
+
+
+        center.appendChild(dot);
+
+    }
+
+
+    return svg;
+
+}
+
+
+/* ==================================================
+   FORMA DEL PÉTALO
+================================================== */
+
+function hacerPetalo(angle){
+
+    const puntos=[];
+
+
+    for(
+        let i=0;
+        i<=PETAL_STEPS;
+        i++
+    ){
+
+        const t =
+            i / PETAL_STEPS;
+
+
+        const radius =
+            PETAL_INNER +
+            (
+                Math.sin(
+                    Math.PI*t
+                )
+                * PETAL_OUTER
+            );
+
+
+        const lateral =
+            Math.sin(
+                Math.PI*t
+            )
+            * PETAL_WIDTH
+            * (1 - t*.5);
+
+
+        const ang =
+            (
+                angle +
+                lateral
+            )
+            * Math.PI / 180;
+
+
+        puntos.push({
+
+            x:
+                radius *
+                Math.cos(ang),
+
+            y:
+                radius *
+                Math.sin(ang)
+
+        });
+
+    }
+
+
+    for(
+        let i=PETAL_STEPS;
+        i>=0;
+        i--
+    ){
+
+        const t =
+            i / PETAL_STEPS;
+
+
+        const radius =
+            PETAL_INNER +
+            (
+                Math.sin(
+                    Math.PI*t
+                )
+                * PETAL_OUTER
+            );
+
+
+        const lateral =
+            -Math.sin(
+                Math.PI*t
+            )
+            * PETAL_WIDTH
+            * (1 - t*.5);
+
+
+        const ang =
+            (
+                angle +
+                lateral
+            )
+            * Math.PI / 180;
+
+
+        puntos.push({
+
+            x:
+                radius *
+                Math.cos(ang),
+
+            y:
+                radius *
+                Math.sin(ang)
+
+        });
+
+    }
+
+
+    let d =
+        "M " +
+        puntos[0].x +
+        " " +
+        puntos[0].y;
+
+
+    for(
+        let i=1;
+        i<puntos.length;
+        i++
+    ){
+
+        d +=
+            " L " +
+            puntos[i].x +
+            " " +
+            puntos[i].y;
+
+    }
+
+
+    d += " Z";
+
+
+    return d;
+
+}
+
+
+/* ==================================================
+   ANIMAR UNA FLOR
+================================================== */
+
+async function animarFlor(flor){
+
+    flor.classList.add(
+        "visible"
+    );
+
+
+    const paths =
+        flor.querySelectorAll(
+            ".petal"
+        );
+
+
+    for(
+        const path of paths
+    ){
+
+        path.style.transition =
+            "stroke-dashoffset .35s linear";
+
+
+        requestAnimationFrame(
+            () => {
+
+                path.style.strokeDashoffset =
+                    0;
+
+            }
+        );
+
+
+        await esperar(120);
+
+    }
+
+
+    const dots =
+        flor.querySelectorAll(
+            ".center-dot"
+        );
+
+
+    for(
+        const dot of dots
+    ){
+
+        dot.style.transition =
+            "opacity .15s";
+
+
+        dot.style.opacity=1;
+
+
+        await esperar(12);
+
+    }
+
+}
+
+
+/* ==================================================
+   ESPERAR
+================================================== */
+
+function esperar(ms){
+
+    return new Promise(
+        resolve =>
+        setTimeout(
+            resolve,
+            ms
+        )
+    );
+
+}
+
+
+/* ==================================================
+   CREAR LAS FLORES
+================================================== */
+
+const floresContainer =
+    document.getElementById(
+        "flores"
+    );
+
+
+const flores=[];
+
+
+for(
+    let i=0;
+    i<8;
+    i++
+){
+
+    const flor =
+        crearFlor();
+
+
+    flor.classList.add(
+        "flor"+(i+1)
+    );
+
+
+    floresContainer.appendChild(
+        flor
+    );
+
+
+    flores.push(flor);
+
+}
+
+
+/* ==================================================
+   ANIMACIÓN DEL RAMO
+================================================== */
+
+async function crearRamo(){
+
+
+    /* REINICIAR PAPEL */
+
+    document
+        .getElementById("papel")
+        .classList.remove(
+            "aparecer"
+        );
+
+
+    /* REINICIAR TALLOS */
+
+    document
+        .getElementById("tallos")
+        .classList.remove(
+            "aparecer"
+        );
+
+
+    /* REINICIAR HOT WHEELS */
+
+    document
+        .querySelectorAll(".auto")
+        .forEach(
+            auto => {
+
+                auto.classList.remove(
+                    "aparecer"
+                );
+
+            }
+        );
+
+
+    /* REINICIAR FLORES */
+
+    flores.forEach(
+        flor => {
+
+            flor.classList.remove(
+                "visible"
+            );
+
+
+            flor.querySelectorAll(
+                ".petal"
+            ).forEach(
+                path => {
+
+                    path.style.strokeDashoffset =
+                        path.dataset.length;
+
+                }
+            );
+
+
+            flor.querySelectorAll(
+                ".center-dot"
+            ).forEach(
+                dot => {
+
+                    dot.style.opacity=0;
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==================================================
+       1. PAPEL VERDE
+    ================================================== */
+
+    await esperar(200);
+
+
+    document
+        .getElementById("papel")
+        .classList.add(
+            "aparecer"
+        );
+
+
+    await esperar(1000);
+
+
+    /* ==================================================
+       2. TALLOS
+    ================================================== */
+
+    document
+        .getElementById("tallos")
+        .classList.add(
+            "aparecer"
+        );
+
+
+    await esperar(900);
+
+
+    /* ==================================================
+       3. FLORES
+    ================================================== */
+
+    for(
+        const flor of flores
+    ){
+
+        await animarFlor(
+            flor
+        );
+
+
+        await esperar(180);
+
+    }
+
+
+    /* ==================================================
+       4. HOT WHEELS
+    ================================================== */
+
+    await esperar(400);
+
+
+    const autos =
+        document.querySelectorAll(
+            ".auto"
+        );
+
+
+    for(
+        const auto of autos
+    ){
+
+        auto.classList.add(
+            "aparecer"
+        );
+
+
+        await esperar(450);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
